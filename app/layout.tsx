@@ -5,6 +5,9 @@ import ConvexClientProvider from "@/components/auth/ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/themes/theme-provider";
+import { dark } from "@clerk/themes";
+import { cookies } from "next/headers";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -29,18 +32,36 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get("theme")?.value || "system";
+
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html
+      lang="en"
+      className={cn("font-sans", geist.variable, theme === "dark" && "dark")}
+      style={
+        theme === "light" || theme === "dark" ? { colorScheme: theme } : {}
+      }
+      suppressHydrationWarning
+    >
       <body className={`${bricolage.variable} ${figtree.variable} antialiased`}>
         <ClerkProvider
           dynamic
           appearance={{
+            baseTheme: theme === "dark" ? dark : undefined,
             cssLayerName: "clerk",
+            elements: {
+              userButtonPopoverCard: "dark:bg-background dark:border-border",
+              userButtonPopoverActionButton: "dark:hover:bg-muted",
+              userButtonPopoverActionButtonText: "dark:text-foreground",
+              userButtonPopoverFooter: "hidden",
+              avatarBox: "size-9",
+            },
             variables: {
               colorPrimary: "var(--terracotta)",
               colorBackground: "var(--background)",
@@ -57,7 +78,17 @@ export default function RootLayout({
             },
           }}
         >
-          <ConvexClientProvider>{children}</ConvexClientProvider>
+          <ConvexClientProvider>
+            {" "}
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </ConvexClientProvider>
           <Toaster richColors closeButton position="bottom-right" />
         </ClerkProvider>
       </body>

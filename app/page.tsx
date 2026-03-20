@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SiteLogo from "@/components/auth/site-logo";
+import { ModeToggle } from "@/components/themes/mode-toggle";
 
 const AVATARS = [
   {
@@ -213,6 +214,7 @@ const Home = () => {
                 </UserButton.MenuItems>
               </UserButton>
             </SignedIn>
+            <ModeToggle />
           </div>
 
           <div className="flex items-center gap-3 md:hidden">
@@ -830,12 +832,12 @@ const Home = () => {
       </section>
 
       {/* CTA */}
-      <section className="border-t border-border/40 bg-foreground py-16 text-background md:py-24">
+      <section className="border-t border-border/40 bg-foreground py-16 text-background dark:bg-card dark:text-foreground md:py-24">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h2 className="font-(family-name:--font-bricolage) text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
             Ready to get started?
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-background/60">
+          <p className="mx-auto mt-4 max-w-lg text-background/60 dark:text-muted-foreground">
             Whether you&apos;re looking for your next role or hiring for your
             team, Jobly makes it simple. Sign up free and start today.
           </p>
