@@ -123,8 +123,11 @@ export const syncCompanyPlan = mutation({
       .query("companies")
       .withIndex("by_clerkOrgId", (q) => q.eq("clerkOrgId", args.clerkOrgId))
       .unique();
+
     if (!company) {
-      throw new ConvexError("Company not found for this organization.");
+      // If company is not found, it might be that the Clerk webhook hasn't
+      // processed yet. We'll return early and let the frontend retry later.
+      return null;
     }
 
     await requireActiveMembership(ctx, company._id, user._id);
