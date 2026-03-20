@@ -4,8 +4,9 @@ import "./globals.css";
 import ConvexClientProvider from "@/components/auth/ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
