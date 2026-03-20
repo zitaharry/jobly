@@ -1,51 +1,80 @@
-# Welcome to your Convex + Next.js + Clerk app
+# Jobly - Modern Job Board Platform
 
-This is a [Convex](https://convex.dev/) project created with [`npm create convex`](https://www.npmjs.com/package/create-convex).
+Jobly is a full-stack job board platform designed for candidates and recruiters. Built with speed and developer experience in mind using Convex, Next.js, and Clerk.
 
-After the initial setup (<2 minutes) you'll have a working full-stack app using:
+## 🚀 Tech Stack
 
-- Convex as your backend (database, server logic)
-- [React](https://react.dev/) as your frontend (web page interactivity)
-- [Next.js](https://nextjs.org/) for optimized web hosting and page routing
-- [Tailwind](https://tailwindcss.com/) for building great looking accessible UI
-- [Clerk](https://clerk.com/) for authentication
+- **Backend:** [Convex](https://convex.dev/) (Database, Serverless Functions, Real-time sync)
+- **Frontend:** [Next.js 15](https://nextjs.org/) (App Router), [React 19](https://react.dev/)
+- **Authentication:** [Clerk](https://clerk.com/) (User management, Organizations, RBAC)
+- **Styling:** [Tailwind CSS 4](https://tailwindcss.com/), [Shadcn UI](https://ui.shadcn.com/)
+- **Editor:** [TipTap](https://tiptap.dev/) (Rich text for job descriptions)
+- **Icons:** [Lucide React](https://lucide.dev/)
 
-## Get started
+## ✨ Key Features
 
-If you just cloned this codebase and didn't use `npm create convex`, run:
+### For Candidates
+- **Professional Profiles:** Build your profile with work experience, education, and certifications.
+- **Resume Management:** Upload and manage multiple resumes, set a default for quick applications.
+- **Job Search:** Real-time job search with filters for workplace type, employment type, and more.
+- **Favorites:** Save jobs to apply later.
+- **Application Tracking:** Monitor the status of your applications in real-time.
+- **Notifications:** Get instant alerts for application status updates and new opportunities.
 
-```
-npm install
+### For Companies / Recruiters
+- **Company Workspaces:** Manage team members and job listings under a unified organization.
+- **Flexible Plans:** Support for Free, Starter, and Growth plans with seat and job limits.
+- **Job Management:** Create, edit, and close job listings with rich text descriptions.
+- **Applicant Tracking (ATS):** Review applications, manage candidate statuses, and track application volume.
+- **Team Collaboration:** Invite members with specific roles (Admin, Recruiter, Member).
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js installed
+- A [Convex](https://www.convex.dev/) account
+- A [Clerk](https://clerk.com/) account
+
+### Installation
+
+1. Clone the repository and install dependencies:
+   ```bash
+   npm install
+   pnpm install
+   ```
+
+2. Set up Convex:
+   ```bash
+   npx convex dev
+   ```
+   Follow the prompts to create a new project.
+
+3. Configure Environment Variables:
+   Add your Clerk keys to your `.env.local` file:
+   ```env
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+   CLERK_SECRET_KEY=sk_test_...
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+   ```
+
+4. Configure Clerk Webhooks:
+   - Go to Clerk Dashboard -> Webhooks.
+   - Point webhooks to `https://your-deployment.convex.site/api/clerk-users-webhook` (for users) and organizations.
+   - Add the `CLERK_WEBHOOK_SECRET` to your Convex environment variables.
+
+### Running the App
+
+```bash
 npm run dev
+pnpm dev
 ```
 
-If you're reading this README on GitHub and want to use this template, run:
+This starts both the Next.js frontend and the Convex backend.
 
-```
-npm create convex@latest -- -t nextjs-clerk
-```
+## 📖 Learn More
 
-Then:
-
-1. Open your app. There should be a "Claim your application" button from Clerk in the bottom right of your app.
-2. Follow the steps to claim your application and link it to this app.
-3. Follow step 3 in the [Convex Clerk onboarding guide](https://docs.convex.dev/auth/clerk#get-started) to create a Convex JWT template.
-4. Uncomment the Clerk provider in `convex/auth.config.ts`
-5. Paste the Issuer URL as `CLERK_JWT_ISSUER_DOMAIN` to your dev deployment environment variable settings on the Convex dashboard (see [docs](https://docs.convex.dev/auth/clerk#configuring-dev-and-prod-instances))
-
-If you want to sync Clerk user data via webhooks, check out this [example repo](https://github.com/thomasballinger/convex-clerk-users-table/).
-
-## Learn more
-
-To learn more about developing your project with Convex, check out:
-
-- The [Tour of Convex](https://docs.convex.dev/get-started) for a thorough introduction to Convex principles.
-- The rest of [Convex docs](https://docs.convex.dev/) to learn about all Convex features.
-- [Stack](https://stack.convex.dev/) for in-depth articles on advanced topics.
-
-## Join the community
-
-Join thousands of developers building full-stack apps with Convex:
-
-- Join the [Convex Discord community](https://convex.dev/community) to get help in real-time.
-- Follow [Convex on GitHub](https://github.com/get-convex/), star and contribute to the open-source implementation of Convex.
+- [Convex Documentation](https://docs.convex.dev/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Clerk Documentation](https://clerk.com/docs)
