@@ -76,11 +76,16 @@ http.route({
   path: "/webhooks/clerk",
   method: "POST",
   handler: httpAction(async (ctx, request) => {
-    const signingSecret = process.env.CLERK_WEBHOOK_SIGNING_SECRET;
+    const signingSecret =
+      process.env.CLERK_WEBHOOK_SIGNING_SECRET ??
+      process.env.CLERK_WEBHOOK_SECRET;
     if (!signingSecret) {
-      return new Response("Missing CLERK_WEBHOOK_SIGNING_SECRET", {
-        status: 500,
-      });
+      return new Response(
+        "Missing CLERK_WEBHOOK_SIGNING_SECRET or CLERK_WEBHOOK_SECRET",
+        {
+          status: 500,
+        },
+      );
     }
 
     const svixId = request.headers.get("svix-id");
@@ -198,6 +203,16 @@ http.route({
     }
 
     return new Response("ok", { status: 200 });
+  }),
+});
+
+http.route({
+  path: "/",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    return new Response("Convex HTTP site is running!", {
+      status: 200,
+    });
   }),
 });
 
