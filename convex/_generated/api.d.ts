@@ -15,7 +15,6 @@ import type * as http from "../http.js";
 import type * as jobs from "../jobs.js";
 import type * as lib_auth from "../lib/auth.js";
 import type * as lib_companies from "../lib/companies.js";
-import type * as myFunctions from "../myFunctions.js";
 import type * as notifications from "../notifications.js";
 import type * as profiles from "../profiles.js";
 import type * as seed from "../seed.js";
@@ -35,7 +34,6 @@ declare const fullApi: ApiFromModules<{
   jobs: typeof jobs;
   "lib/auth": typeof lib_auth;
   "lib/companies": typeof lib_companies;
-  myFunctions: typeof myFunctions;
   notifications: typeof notifications;
   profiles: typeof profiles;
   seed: typeof seed;
