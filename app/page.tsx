@@ -908,6 +908,18 @@ const Home = () => {
             >
               Pricing
             </Link>
+            <Link
+              href="/privacy"
+              className="transition-colors hover:text-foreground"
+            >
+              Privacy
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors hover:text-foreground"
+            >
+              Terms
+            </Link>
           </nav>
           <p className="text-xs text-muted-foreground/60">
             &copy; {new Date().getFullYear()} Jobly
